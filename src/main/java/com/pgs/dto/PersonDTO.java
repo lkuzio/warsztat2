@@ -1,5 +1,8 @@
 package com.pgs.dto;
 
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.NotNull;
 import java.sql.Date;
 
 /**
@@ -8,7 +11,11 @@ import java.sql.Date;
 public class PersonDTO {
 
     private Long id;
+    @NotNull
+    @Length(min=2, max=64)
     private String firstName;
+    @NotNull
+    @Length(min=2, max=120)
     private String lastName;
     private Date dateOfBirth;
 

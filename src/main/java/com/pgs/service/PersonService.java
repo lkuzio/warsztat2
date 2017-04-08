@@ -14,4 +14,8 @@ public interface PersonService {
     PersonDTO findById(Long id);
 
     void add(PersonDTO personDTO);
+
+    void remove(Long id);
+
+    PersonDTO update(PersonDTO personDTO);
 }

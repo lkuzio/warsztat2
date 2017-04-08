@@ -3,11 +3,9 @@ package com.pgs.controller;
 import com.pgs.dto.PersonDTO;
 import com.pgs.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -25,4 +23,20 @@ public class PersonController {
     public List<PersonDTO> findAll(){
         return personService.findAll();
     }
+
+    @RequestMapping(method=RequestMethod.POST)
+    public void addPerson(@Valid @RequestBody PersonDTO personDTO){
+        personService.add(personDTO);
+    }
+
+    @RequestMapping(path = "/{id}",method=RequestMethod.DELETE)
+    public void remove(@PathVariable Long id){
+        personService.remove(id);
+    }
+
+    @RequestMapping(method=RequestMethod.PUT)
+    public PersonDTO update(@Valid @RequestBody PersonDTO personDTO){
+        return personService.update(personDTO);
+    }
+
 }

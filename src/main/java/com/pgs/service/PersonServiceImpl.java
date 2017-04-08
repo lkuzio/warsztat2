@@ -1,6 +1,7 @@
 package com.pgs.service;
 
 import com.pgs.dto.PersonDTO;
+import com.pgs.entity.Person;
 import com.pgs.mapper.PersonMapper;
 import com.pgs.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +31,20 @@ public class PersonServiceImpl implements PersonService {
 
     public void add(PersonDTO personDTO) {
         personRepository.save(personMapper.fromDTO(personDTO));
+    }
+
+    @Override
+    public void remove(Long id) {
+        personRepository.delete(id);
+    }
+
+    @Override
+    public PersonDTO update(PersonDTO personDTO){
+        Person updated =null;
+        Person existed = personRepository.findById(personDTO.getId());
+        if(existed!=null){
+            updated=personRepository.save(personMapper.fromDTO(personDTO));
+        }
+        return personMapper.toDTO(updated);
     }
 }
